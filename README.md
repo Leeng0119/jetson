@@ -7,3 +7,53 @@
 
 #2 2장, Jetpack & ROS install
 https://drive.google.com/file/d/1HU5F1cwiw2wzuNBdLL9R3Wvpg5AXLzw5/view?usp=sharing 4GB 이미지
+
+1.1. Terminal(=SSH)에서 WiFi 연결하기
+
+# 실행해야할 명령
+$ sudo nmcli device wifi list
+$ sudo nmcli device wifi connect <ssid_name> password <password>
+$ ifconfig
+
+# 명령어 실행 예제
+# password가 없는 경우
+1, zeta@jp461:~$ sudo nmcli device wifi connect STARTUP_LOUNGE_love
+2, ifconfig
+# password가 있는 경우
+jetson@jp4512G:~$ sudo nmcli device wifi connect U+NetD681 password xxxxxxx
+
+# 연결을 해제할 때
+$ sudo nmcli device disconnect wlan0
+
+#명령 실행 로그
+jetson@jp4512G:~/catkin_ws$ sudo nmcli device disconnect wlan0
+Device 'wlan0' successfully disconnected.
+
+1.2 Cooling Fan
+cd Downloads
+git clone https://github.com/jetsonworld/jetson-fan-ctl.git  --->ls
+cd jetson-fan-ctl
+
+sudo sh install.sh
+
+2.1 ROS Melodic 설치
+
+cd ~/Downloads/
+sudo apt update
+
+git clone https://github.com/zeta0707/installROS.git
+cd installROS
+./install-ros.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
