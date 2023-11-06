@@ -45,8 +45,56 @@ git clone https://github.com/zeta0707/installROS.git
 cd installROS
 ./install-ros.sh
 
+~/catkin_ws까지 만들어집니다. 지금까지 작업하면 폴더는 아래와 같을 것입니다.
 
+2.2 .bashrc 수정
 
+PC, Jetson에 작업을 편리하게 할 환경을 .bashrc에서 추가해줍니다. alias 명령어추가, PC ↔ Jetson remote 환경을 설정합니다.
+# mirco USB 케이블 연결을 사용할 경우
+192.168.55.1: Jetson IP
+192.168.55.100: PC IP
+(하지만 후에 알기로는 IP를 넣은 코드를 베시에 넣는 다면 코드가 엉켜버려 후에 뺴버렸다.) 
+
+2.4 ROS 동작 확인(Option)
+설치 후 제대로 되었는지 turtlesim으로 확인할 수 있습니다. 세 개의 창에 하나씩 아래 명령어를 실행해주세요. 두가지 방법으로 실행 가능합니다.
+. ROS remote 환경
+. PC에서 VNC로 Jetson에 접속, 또는 Jetson에 TV를 연결
+# 터미널 #1
+jetson@jp4512G:~/catkin_ws$ roscore
+# 터미널 #2
+jetson@jp4512G:~/catkin_ws$ rosrun turtlesim turtlesim_node
+# 터미널 #3
+jetson@jp4512G:~/catkin_ws$ rosrun turtlesim turtle_teleop_key
+
+Teleop by keyboard
+원래는 조이스틱도 할려고 했지만 시간상에 관계로 패스 하였습니다 
+할수 없이 키보드에 젯슨을 연결하여 진행하였습니다.
+
+1.  teleop_keyboard 키 사용 방법
+실행했을때 message입니다.
+Control Your Robot!
+---------------------------
+Moving around:
+        w
+   a    s    d
+        x
+
+w/x : increase/decrease linear velocity (~ 1.2 m/s)
+a/d : increase/decrease angular velocity (~ 1.8)
+
+space key, s : force stop
+
+CTRL-C to quit
+이를 실행 시키기 위한 코드로는 
+# terminal #1
+$ roslaunch jessicar_control keyboard_control.launch
+
+# terminal #2
+$ roslaunch jessicar_teleop jessicar_teleop_key.launch
+
+사용법으로는 W는 전진 X는 후진 S는 정지를 담당한다
+
+W,X를 단계 별로 누를떄마다 속도가 빨라지며 4단계 까지 있
 
 
 
