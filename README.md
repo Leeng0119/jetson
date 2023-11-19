@@ -94,7 +94,27 @@ $ roslaunch jessicar_teleop jessicar_teleop_key.launch
 
 사용법으로는 W는 전진 X는 후진 S는 정지를 담당한다
 
-W,X를 단계 별로 누를떄마다 속도가 빨라지며 4단계 까지 있
+W,X를 단계 별로 누를떄마다 속도가 빨라지며 4단계 까지 있다
+
+터미널 #3, CV Magic, Bind Ball with Pixel Value
+requires load parameter at first
+jetson@jp4612GCv346Py37:/catkin_ws$ rosparam load src/jessiarm/jessiarm_control/config/find_ball.yaml jetson@jp4612GCv346Py37:/catkin_ws$ rosrun jessiarm_cv find_ball.py
+
+터미널 #4, Blob Point to Twist
+$ rosrun jessiarm_control chase_the_ball.py
+
+터미널 #5, PWM Control node
+$ rosrun jessiarm_control blob_chase.py
+
+11장, Yolo4 PicknPlace 1.1 darknet_ros 설치 sudo apt-get install -y ros-melodic-image-pipeline
+
+cd ~/catkin_ws/src git clone --recursive https://github.com/Tossy0423/yolov4-for-darknet_ros.git 1.2 darknet_ros 수정 yolov4 → yolov4-tiny로 수정, 그리고 custom dataset에 해당하는 config, weights 적용
+
+cd ~/catkin_ws/src/yolov4-for-darknet_ros/darknet_ros git clone https://github.com/zeta0707/darknet_ros_custom.git cp -rf darknet_ros_custom/* darknet_ros/ package가 준비 되었으므로 빌드합니다.
+
+zeta@zeta-nano:/catkin_ws/src$ cd .. zeta@zeta-nano:/catkin_ws$ cma 2. darknet_ros 실행 2.1 coco 객체 PicknPlace #terminal #1, object detect using Yolo_v4 jetson@jp4612GCv346Py37:~$ roslaunch darknet_ros yolo_v4.launch
+
+#terminal #2, camera publish, object x/y -> robot move jetson@jp4612GCv346Py37:~$ roslaunch jessiarm_control yolo_chase.launch
 
 
 
